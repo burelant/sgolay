@@ -3,9 +3,29 @@ function obj = sgolay_coeffs(input,frame_half_length,order,options)
     % SGOLAY_COEFFS determines the local coefficients of a smoothing
     % polynom of specified order and frame half length.
 
+    % Syntax:
+
+    %   obj = sgolay_coeffs(input,frame_half_length,order,options) 
+
+    % Arguments:
+
+    % * input: a vector or real numbers
+    % * frame_half_length: the half lenght of the filter frame (positive
+    %       scalar integer)
+    % * order: the smooting polynomial order (positive scalar integer)
+
+    % Output:
+
+    % obj: a MATLAB structure that can be used as input for sgolay_smooth
+    % and sgolay_deriv.
+
+    % Author: Antoine BUREL / Arkema / CERDATO / LEM
+    % Current version: 2023
+
     arguments
         input double {mustBeVector,mustBeReal}
-        frame_half_length (1,1) double {mustBePositiveInteger(frame_half_length)}
+        frame_half_length (1,1) double ...
+            {mustBePositiveInteger(frame_half_length)}
         order (1,1) double {mustBePositiveInteger(order)}
         options.useParallel (1,1) logical = false
         options.regularize (1,1) logical = false
@@ -20,7 +40,8 @@ function obj = sgolay_coeffs(input,frame_half_length,order,options)
     N = size(input,1) ;
 
     if N <= order 
-        error('The input vector has less elements than the polynomial order value.') ;
+        error("The input vector has less elements than the polynomial" ...
+            +" order value.") ;
     end
 
     obj.coeffs = zeros(N,order+1) ;
