@@ -19,8 +19,7 @@ function obj = sgolay_coeffs(input,frame_half_length,order,options)
     % obj: a MATLAB structure that can be used as input for sgolay_smooth
     % and sgolay_deriv.
 
-    % Author: Antoine BUREL / Arkema / CERDATO / LEM
-    % Current version: 2023
+    % Author: Antoine BUREL / 2023
 
     arguments
         input double {mustBeVector,mustBeReal}
